@@ -1,0 +1,19 @@
+import React from "react";
+
+const Gallery = () => {
+  return (
+    <section className="gallery" id="gallery">
+      <div className="container">
+        <h2>Gallery</h2>
+        <div className="gallery-grid">
+          <img src="images/gallery1.jpg" alt="Gallery Image 1" />
+          <img src="images/gallery2.jpg" alt="Gallery Image 2" />
+          <img src="images/gallery3.jpg" alt="Gallery Image 3" />
+          <img src="images/gallery4.jpg" alt="Gallery Image 4" />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Gallery;
