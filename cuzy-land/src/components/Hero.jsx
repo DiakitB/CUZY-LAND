@@ -18,7 +18,7 @@ const Hero = () => {
           Handcrafted candles with custom scents and labels, made with love.
         </h4>
         <a
-          href="/contact"
+          href="/customize"
           className="inline-block bg-blush hover:bg-blush-dark transition transform hover:scale-105 px-6 py-3 rounded-full font-semibold shadow-lg"
         >
           Customize Your Candle

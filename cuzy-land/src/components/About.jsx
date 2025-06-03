@@ -8,7 +8,7 @@ const About = () => {
   const overlayTexts = [
     "Every candle tells a story.",
     "Hand-poured with heart.",
-    "Your scent. Your story."
+    "Your scent. Your story.",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,32 +27,36 @@ const About = () => {
   }, []);
 
   return (
-    <section
-      id="about"
-      className="relative h-screen flex items-center justify-center bg-about-gradient font-serif text-brown-dark overflow-hidden"
-    >
-      {/* Image Layer */}
-      <div className="absolute inset-0">
-        {images.map((img, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt={`Candle ${idx + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-              idx === currentIndex ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
+    <section id="about" className="font-serif text-brown-dark">
+      {/* Image Section */}
+      <div className="relative h-screen flex items-center justify-center bg-about-gradient overflow-hidden">
+        {/* Image Layer */}
+        <div className="absolute inset-0">
+          {images.map((img, idx) => (
+            <img
+              key={idx}
+              src={img}
+              alt={`Candle ${idx + 1}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                idx === currentIndex ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-black bg-opacity-40" />
+        </div>
+
+        {/* Text Overlay */}
+        <div className="relative z-10 text-center px-6 md:px-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-ivory drop-shadow-md mb-4 transition-opacity duration-1000 ease-in-out">
+            {overlayTexts[currentIndex]}
+          </h2>
+        </div>
       </div>
 
-      {/* Text Overlay */}
-      <div className="relative z-10 text-center px-6 md:px-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-ivory drop-shadow-md mb-4 transition-opacity duration-1000 ease-in-out">
-          {overlayTexts[currentIndex]}
-        </h2>
-        <p className="text-lg md:text-xl text-ivory font-sans max-w-2xl mx-auto leading-relaxed drop-shadow">
-          At <span className="font-semibold text-blush-dark">Ember & Essence</span>, we believe
+      {/* Paragraph Section */}
+      <div className="bg-white py-12 px-6 md:px-12">
+        <p className="text-lg md:text-xl text-gray-800 font-sans max-w-2xl mx-auto leading-relaxed">
+          At <span className="font-semibold text-pink-600">Ember & Essence</span>, we believe
           that every scent captures a memory. Our candles are hand-poured in small batches, made with
           natural ingredients, and customized just for you.
         </p>
@@ -62,5 +66,3 @@ const About = () => {
 };
 
 export default About;
-
-
