@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
-import { useCart } from '../context/CartContext.jsx'; // Correct import path
+import { useCart } from '../context/CartContext.jsx'; // 🛒 Import cart context
 
 const API_URL = 'http://localhost:3000/api/gallery/getAll';
 
