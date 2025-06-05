@@ -36,7 +36,7 @@ const GalleryUpload = () => {
 
     try {
       const response = await axios.post(
-        "/api/gallery/upload", // ✅ Relative URL
+        "http://localhost:3000/api/gallery/upload",
         formData,
         {
           headers: {
@@ -46,8 +46,8 @@ const GalleryUpload = () => {
       );
       console.log("Upload response:", response.data);
       toast.success("✅ Image uploaded successfully!");
+      console.log("Upload response:", response.data);
       console.log("Image URL:", response.data.fileUrl);
-
       // Reset form
       setImage(null);
       setFormFields({ title: '', description: '' });
