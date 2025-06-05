@@ -1,6 +1,6 @@
 // src/components/CartSidebar.jsx
 import React from 'react';
-import { useCart } from '../context/CartContext.jsx' // Adjust the import path as necessary
+import { useCart } from '../context/TempCartContext' // Adjust the import path as necessary
 export default function CartSidebar() {
   const { cartItems, isCartOpen, removeFromCart, toggleCart } = useCart();
 
