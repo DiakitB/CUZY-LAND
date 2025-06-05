@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import CartToggleButton from '../components/cartToggleBtn'
+import CartToggleButton from '../components/cartToggleBtn';
+import logoImage from "../assets/candles/Ember-2.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,17 +18,31 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-ivory to-blush-light shadow-md z-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        <h1 className="text-3xl font-serif font-bold text-brown-dark tracking-wide">
-          Ember<span className="text-blush-dark">&</span>Essence
-        </h1>
+        {/* Logo and Brand Name */}
+        <div className="flex items-center space-x-2">
+          <img
+            src={logoImage}
+            alt="Ember & Essence Logo"
+            className="h-8 w-8 md:h-16 md:w-16 object-contain"
+          />
+          <h1 className="hidden md:block text-2xl md:text-3xl font-serif font-bold text-brown-dark tracking-wide px-1 md:mb-0">
+            Ember<span className="text-blush-dark">&</span>Essence
+          </h1>
+        </div>
 
-        {/* Menu Toggle Button */}
-        <button
-          className="text-3xl md:hidden text-brown-dark focus:outline-none transition-transform duration-200"
-          onClick={toggleMenu}
-        >
-          {isMenuOpen ? "✖" : "☰"}
-        </button>
+        {/* Flex container for Hamburger Icon and Cart Toggle Button */}
+        <div className="flex items-center justify-between space-x-8 md:hidden relative">
+          {/* Menu Toggle Button */}
+          <button
+            className="text-3xl text-brown-dark focus:outline-none transition-transform duration-200"
+            onClick={toggleMenu}
+          >
+            {isMenuOpen ? "✖" : "☰"}
+          </button>
+
+          {/* Cart Toggle Button */}
+          <CartToggleButton />
+        </div>
 
         {/* Navigation */}
         <nav
@@ -79,8 +94,10 @@ const Header = () => {
           </Link>
         </nav>
 
-        {/* Cart Toggle Button */}
-        <CartToggleButton />
+        {/* Cart Toggle Button for larger screens */}
+        <div className="hidden md:block">
+          <CartToggleButton />
+        </div>
       </div>
     </header>
   );
