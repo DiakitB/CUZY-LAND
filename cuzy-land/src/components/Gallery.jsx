@@ -3,8 +3,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { useCart } from '../context/TempCartContext'; // 🛒 Import cart context
 
-// ✅ Use relative URL for production & mobile compatibility
-const API_URL = '/api/gallery/getAll';
+const API_URL = 'http://localhost:3000/api/gallery/getAll';
 
 export default function Gallery() {
   const [candles, setCandles] = useState([]);
@@ -15,9 +14,7 @@ export default function Gallery() {
     try {
       const response = await axios.get(API_URL);
       const fetchedCandles = response.data;
-      const sortedCandles = fetchedCandles.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
+      const sortedCandles = fetchedCandles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setCandles(sortedCandles);
       console.log('Fetched candles:', sortedCandles); // Debugging log
     } catch (error) {
