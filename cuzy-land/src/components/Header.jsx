@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import CartToggleButton from '../components/cartToggleBtn'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,13 +57,30 @@ const Header = () => {
             Testimonials
           </Link>
           <Link
+            to="/gallery"
+            onClick={closeMenu}
+            className={`block px-6 py-4 md:inline-block transition-colors duration-200 ${isActive("/gallery")}`}
+          >
+            Gallery
+          </Link>
+          <Link
             to="/contact"
             onClick={closeMenu}
             className={`block px-6 py-4 md:inline-block transition-colors duration-200 ${isActive("/contact")}`}
           >
             Contact
           </Link>
+          <Link
+            to="/upload"
+            onClick={closeMenu}
+            className={`block px-6 py-4 md:inline-block transition-colors duration-200 ${isActive("/upload")}`}
+          >
+            Add New Candle
+          </Link>
         </nav>
+
+        {/* Cart Toggle Button */}
+        <CartToggleButton />
       </div>
     </header>
   );

@@ -9,11 +9,23 @@ import CustomizeYourCandle from "./components/Customize";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ThankYou from "./components/ThankYou";
+import Gallery from "./components/Gallery";
+import Testimonials from "./components/Testimonials";
+import GalleryUpload from "./components/GalleryUpload";
+import CartSidebar from "./components/CartSiderbar";
+
+
+
+
+
+
+
 const App = () => {
   return (
     <Router>
       <Header />
-
+      <CartSidebar /> {/* ✅ CartSidebar is now visible on every page */}
+  
       <main className="pt-20"> {/* Optional: adds spacing below fixed Header */}
         <Routes>
           <Route path="/" element={<Hero />} />
@@ -21,10 +33,11 @@ const App = () => {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/customize" element={<CustomizeYourCandle />} />
           <Route path="/thank-you" element={<ThankYou />} />
-          {/* Uncomment these routes when the components are ready */}
-          {/* <Route path="/products" element={<Products />} /> */}
-          {/* <Route path="/cart" element={<Cart />} /> */}
-          {/* <Route path="/checkout" element={<Checkout />} /> */}
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/upload" element={<GalleryUpload />} />
+         
+          {/* Add more routes as needed */}
         </Routes>
       </main>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable />

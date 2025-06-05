@@ -31,6 +31,7 @@ export default function CustomizeYourCandle() {
   };
 
   const handleSubmit = async () => {
+    // Validate form fields
     if (!form.fragrance || !form.color || !form.size || !form.jar || !form.label) {
       toast.error('❌ Please fill out all fields.');
       return;
@@ -38,13 +39,31 @@ export default function CustomizeYourCandle() {
   
     try {
       console.log('Form data:', form);
+  
+      // Make POST request to save the candle
       const response = await axios.post('http://localhost:3000/api/candles', form);
       console.log('Candle saved:', response.data);
+  
+      // Show success message and navigate to thank-you page
       toast.success('🕯 Your candle has been saved successfully!');
       setTimeout(() => navigate('/thank-you'), 2000);
     } catch (error) {
+      // Enhanced error handling
       console.error('Error saving candle:', error);
-      toast.error('❌ Failed to save your candle. Please try again.');
+  
+      if (error.response) {
+        // Server responded with a status code outside the 2xx range
+        console.error('Server error response:', error.response.data);
+        toast.error(`❌ Failed to save your candle: ${error.response.data.message || 'Server error.'}`);
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error('No response received:', error.request);
+        toast.error('❌ Failed to save your candle: No response from server.');
+      } else {
+        // Something else happened during the request setup
+        console.error('Error message:', error.message);
+        toast.error(`❌ Failed to save your candle: ${error.message}`);
+      }
     }
   };
   return (
@@ -151,7 +170,7 @@ export default function CustomizeYourCandle() {
 
       <button
         onClick={handleSubmit}
-        className="w-full py-3 bg-rose-600 text-white font-semibold rounded-md shadow hover:bg-rose-700 transition"
+        className="w-full py-3 bg-rose-600  font-semibold rounded-md shadow hover:bg-rose-700 transition"
       >
         💕 Create My Candle
       </button>

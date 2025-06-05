@@ -4,6 +4,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const express = require('express');
 const candleRoutes = require('./routes/candleRoutes')
+const galleryRoutes = require('./routes/galleryRoutes');
+
+dotenv.config({ path: './config.env' });
 
 const app = express();
 
@@ -17,6 +20,16 @@ app.use(cors())
 app.use(express.json());
 
 app.use('/api/candles', candleRoutes);
+app.use('/api/gallery', galleryRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({
+    message: 'An unexpected error occurred.',
+    error: err.message,
+  });
+});
 
 
 
