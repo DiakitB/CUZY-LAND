@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../context/cartContext';
+import { useCart } from '../context/CartContext.jsx';
 
 export default function CartToggleButton() {
   const { cartItems, toggleCart } = useCart();

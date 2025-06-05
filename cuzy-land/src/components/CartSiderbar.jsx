@@ -1,6 +1,6 @@
 // src/components/CartSidebar.jsx
 import React from 'react';
-import { useCart } from '../context/cartContext';
+import { useCart } from '../context/CartContext.jsx';
 
 export default function CartSidebar() {
   const { cartItems, isCartOpen, removeFromCart, toggleCart } = useCart();
