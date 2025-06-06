@@ -36,7 +36,7 @@ const GalleryUpload = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/gallery/upload",
+        "http://192.168.2.40:3000/api/gallery/upload",
         formData,
         {
           headers: {
