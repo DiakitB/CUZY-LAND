@@ -3,7 +3,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { useCart } from '../context/TempCartContext'; // 🛒 Import cart context
 
-const API_URL = 'http://192.168.2.40:3000/api/gallery/getAll';
+const API_URL = 'https://192.168.2.40:3000/api/gallery/getAll';
 
 export default function Gallery() {
   const [candles, setCandles] = useState([]);
