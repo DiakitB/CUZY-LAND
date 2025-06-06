@@ -7,18 +7,62 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependency directories
+node_modules/
+dist/
+dist-ssr/
+
+# Environment files
+.env
+*.env
+server/config.env
+
+# Local files
 *.local
 
 # Editor directories and files
-.vscode/*
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Build and output directories
+build/
+coverage/
+.tmp/
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+*.swp
+*.lock
+*.pid
+*.seed
+*.state
+
+# Test output
+*.out
+*.spec.js.snap
+*.test.js.snap
+coverage/
+
+# Ignore macOS system files
+.AppleDouble
+.LSOverride
+
+# Ignore Windows system files
+$RECYCLE.BIN/
+
+# Ignore Linux system files
+*~
