@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CartToggleButton from '../components/TempCartToggleBtn.jsx'; // Adjust the import path as necessary
-import logoImage from "../assets/candles/Ember-2.png";
+import logoImage from "../assets/candles/Logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -15,7 +15,7 @@ if (!process.env.DATABASE) {
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Replace with your frontend's URL
+  origin: 'http://localhost:5173', // Allow requests from your frontend's origin
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));

@@ -41,7 +41,7 @@ export default function CustomizeYourCandle() {
       console.log('Form data:', form);
   
       // Make POST request to save the candle
-      const response = await axios.post('https://192.168.2.40:3000/api/candles', form);
+      const response = await axios.post('http://192.168.2.40:3000/api/candles', form);
       console.log('Candle saved:', response.data);
   
       // Show success message and navigate to thank-you page
