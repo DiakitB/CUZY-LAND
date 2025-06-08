@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion'; // Optional for smooth animations
+import { motion } from 'framer-motion';
 import CandlePreview3D from './CandlePreview3D';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -17,7 +17,6 @@ const sizes = ['Small', 'Medium', 'Large'];
 const jars = ['Glass Jar', 'Ceramic Pot', 'Tin Can'];
 
 export default function CustomizeYourCandle() {
-  
   const [form, setForm] = useState({
     fragrance: '',
     color: '',
@@ -25,47 +24,43 @@ export default function CustomizeYourCandle() {
     jar: '',
     label: '',
   });
-  const navigate = useNavigate(); // For navigation after submission
+
+  const [image, setImage] = useState(null);
+  const navigate = useNavigate();
+
   const handleChange = (key, value) => {
     setForm({ ...form, [key]: value });
   };
 
   const handleSubmit = async () => {
-    // Validate form fields
-    if (!form.fragrance || !form.color || !form.size || !form.jar || !form.label) {
-      toast.error('❌ Please fill out all fields.');
+    if (!form.fragrance || !form.color || !form.size || !form.jar || !form.label || !image) {
+      toast.error('❌ Please fill out all fields and upload an image.');
       return;
     }
-  
+
+    const formData = new FormData();
+    formData.append('fragrance', form.fragrance);
+    formData.append('color', form.color);
+    formData.append('size', form.size);
+    formData.append('jar', form.jar);
+    formData.append('label', form.label);
+    formData.append('image', image);
+
     try {
-      console.log('Form data:', form);
-  
-      // Make POST request to save the candle
-      const response = await axios.post('http://192.168.2.40:3000/api/candles', form);
-      console.log('Candle saved:', response.data);
-  
-      // Show success message and navigate to thank-you page
+      const response = await axios.post('http://192.168.2.40:3000/api/candles', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
       toast.success('🕯 Your candle has been saved successfully!');
       setTimeout(() => navigate('/thank-you'), 2000);
     } catch (error) {
-      // Enhanced error handling
       console.error('Error saving candle:', error);
-  
-      if (error.response) {
-        // Server responded with a status code outside the 2xx range
-        console.error('Server error response:', error.response.data);
-        toast.error(`❌ Failed to save your candle: ${error.response.data.message || 'Server error.'}`);
-      } else if (error.request) {
-        // Request was made but no response received
-        console.error('No response received:', error.request);
-        toast.error('❌ Failed to save your candle: No response from server.');
-      } else {
-        // Something else happened during the request setup
-        console.error('Error message:', error.message);
-        toast.error(`❌ Failed to save your candle: ${error.message}`);
-      }
+      toast.error('❌ Failed to save your candle. Please try again.');
     }
   };
+
   return (
     <motion.section
       className="max-w-3xl mx-auto bg-pink-50 p-8 rounded-lg shadow-lg mt-10"
@@ -157,20 +152,29 @@ export default function CustomizeYourCandle() {
         />
       </div>
 
-        {/* 3D Candle Preview */}
-        <div className="mb-8 text-center">
+      {/* Upload Image */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">Upload Candle Image</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+          className="w-full border border-rose-200 rounded-md px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-rose-400"
+        />
+      </div>
+
+      {/* 3D Candle Preview */}
+      <div className="mb-8 text-center">
         <CandlePreview3D color={form.color || '#ffffff'} label={form.label || 'Your Label Here'} />
         <p className="mt-3 text-lg font-serif text-rose-700">{form.label || 'Your Label Here'}</p>
         <p className="text-sm text-gray-500 mt-1 italic">
-            {form.fragrance || 'Fragrance'} • {form.size || 'Size'} • {form.jar || 'Jar Style'}
+          {form.fragrance || 'Fragrance'} • {form.size || 'Size'} • {form.jar || 'Jar Style'}
         </p>
-        </div>
-
-
+      </div>
 
       <button
         onClick={handleSubmit}
-        className="w-full py-3 bg-rose-600  font-semibold rounded-md shadow hover:bg-rose-700 transition"
+        className="w-full py-3 bg-rose-600 text-white font-semibold rounded-md shadow hover:bg-rose-700 transition"
       >
         💕 Create My Candle
       </button>
