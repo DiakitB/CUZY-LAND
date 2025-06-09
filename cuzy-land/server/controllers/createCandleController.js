@@ -5,11 +5,11 @@ const newCandle = require('../models/NewCandle'); // Adjust the path as necessar
 exports.createNewCandle = async (req, res) => {
     console.log('Received request to create candle:', req.body);
     try {
-      const { title, description } = req.body;
+      const { title, description, price} = req.body;
       const imageUrl = req.file.location; // S3 file URL
   
       // Validate required fields
-      if (!title || !description || !imageUrl) {
+      if (!title || !description || !imageUrl || !price) {
         return res.status(400).send({ message: 'Title, description, and image URL are required.' });
       }
   
@@ -18,6 +18,8 @@ exports.createNewCandle = async (req, res) => {
         title,
         description,
         imageUrl,
+        price,
+
       });
       console.log('Candle created successfully:', createdCandle);
       res.status(201).send({

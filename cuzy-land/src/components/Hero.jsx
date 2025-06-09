@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import heroImage from "../assets/hero.jpg";
 
 const Hero = () => {
@@ -13,16 +14,27 @@ const Hero = () => {
         <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif italic animate-slide-in">
           Welcome to <span className="text-blush-dark">Ember & Essence</span>
         </h1>
-        <h4 className="text-xl text-ivory mb-6 font-sans">
+        <h4 className="text-xl text-blue-900 mb-6 font-sans">
           Your scent. Your story.<br />
           Handcrafted candles with custom scents and labels, made with love.
         </h4>
-        <a
-          href="/customize"
-          className="inline-block bg-blush hover:bg-blush-dark transition transform hover:scale-105 px-6 py-3 rounded-full font-semibold shadow-lg"
-        >
-          Customize Your Candle
-        </a>
+
+        {/* CTA Buttons */}
+        <div className="flex justify-center gap-4 mt-4 flex-wrap">
+          <Link
+            to="/customize"
+            className="bg-blush text-white hover:bg-blush-dark transition transform hover:scale-105 px-6 py-3 rounded-full font-semibold shadow-lg"
+          >
+            Customize Your Candle
+          </Link>
+
+          <Link
+            to="/how-it-works"
+            className="border-2 border-blush text-blush hover:bg-blush hover:text-white transition transform hover:scale-105 px-6 py-3 rounded-full font-semibold shadow-lg"
+          >
+            How It Works
+          </Link>
+        </div>
       </div>
 
       {/* Downward scroll indicator */}

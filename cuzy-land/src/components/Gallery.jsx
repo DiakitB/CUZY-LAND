@@ -3,7 +3,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { useCart } from '../context/TempCartContext'; // 🛒 Import cart context
 
-const API_URL = 'http://localhost:3000/api/gallery/getAll';
+const API_URL = 'http://10.0.0.183:3000/api/gallery/getAll';
 
 export default function Gallery() {
   const [candles, setCandles] = useState([]);
@@ -47,6 +47,9 @@ export default function Gallery() {
               {selectedCandle.title}
             </h2>
             <p className="text-gray-700 text-lg">{selectedCandle.description}</p>
+            <p className="text-gray-900 text-xl font-semibold mt-2">
+              Price: ${selectedCandle.price.toFixed(2)}
+            </p>
             <button
               onClick={() => addToCart(selectedCandle)}
               className="mt-4 bg-rose-600 hover:bg-rose-700 text-white py-2 px-4 rounded transition"
@@ -84,6 +87,9 @@ export default function Gallery() {
                   <h3 className="text-lg font-semibold text-rose-800">
                     {candle.title}
                   </h3>
+                  <p className="text-gray-900 text-md font-medium mt-1">
+                    Price: ${candle.price.toFixed(2)}
+                  </p>
                 </div>
               </div>
               <div className="px-3 pb-4 text-center">

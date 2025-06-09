@@ -47,14 +47,18 @@ export default function CustomizeYourCandle() {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('http://192.168.2.40:3000/api/candles', formData, {
+      const response = await axios.post('http://10.0.0.183:3000/api/candles', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+      
       toast.success('🕯 Your candle has been saved successfully!');
-      setTimeout(() => navigate('/thank-you'), 2000);
+      if (response.data && response.data.candle) {
+        setTimeout(() => navigate('/candle-details', { state: { candle: response.data.candle } }), 2000);
+      } else {
+        console.warn('Candle data is missing in the response.');
+      }
     } catch (error) {
       console.error('Error saving candle:', error);
       toast.error('❌ Failed to save your candle. Please try again.');
@@ -174,7 +178,7 @@ export default function CustomizeYourCandle() {
 
       <button
         onClick={handleSubmit}
-        className="w-full py-3 bg-rose-600 text-white font-semibold rounded-md shadow hover:bg-rose-700 transition"
+        className="w-full py-3 bg-rose-600 text-rose-50 font-semibold rounded-md shadow hover:bg-rose-700 transition"
       >
         💕 Create My Candle
       </button>

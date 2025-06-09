@@ -6,6 +6,7 @@ const express = require('express');
 const candleRoutes = require('./routes/candleRoutes');
 const galleryRoutes = require('./routes/galleryRoutes');
 
+
 const app = express();
 
 if (!process.env.DATABASE) {
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/candles', candleRoutes);
 app.use('/api/gallery', galleryRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

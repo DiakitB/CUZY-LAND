@@ -33,10 +33,11 @@ const GalleryUpload = () => {
     formData.append("image", image);
     formData.append("title", formFields.title);
     formData.append("description", formFields.description);
+    formData.append("price", formFields.price || ''); // Ensure price is included
 
     try {
       const response = await axios.post(
-        "http://192.168.2.40:3000/api/gallery/upload",
+        "http://10.0.0.183:3000/api/gallery/upload",
         formData,
         {
           headers: {
@@ -47,7 +48,7 @@ const GalleryUpload = () => {
       console.log("Upload response:", response.data);
       toast.success("✅ Image uploaded successfully!");
       console.log("Upload response:", response.data);
-      console.log("Image URL:", response.data.fileUrl);
+      console.log("Image URL:", response.data.imageUrl);
       // Reset form
       setImage(null);
       setFormFields({ title: '', description: '' });
@@ -78,6 +79,14 @@ const GalleryUpload = () => {
             onChange={handleChange}
             className="mb-6 w-full p-3 border rounded-lg"
           />
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formFields.price || ''}
+              onChange={handleChange}
+              className="mb-6 w-full p-3 border rounded-lg"
+            />
           <input
             type="file"
             accept="image/*"

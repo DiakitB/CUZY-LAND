@@ -9,6 +9,10 @@ const Playgroung = () =>{
         // You can add more functionality here
     }
 
+
+    const testing = ()=>{
+        console.log('testing ')
+    }
     return (
         <div className="testing">
 
@@ -19,4 +23,10 @@ const Playgroung = () =>{
 
         </div>
     )
+}
+
+const provoking = ()=>{
+
+    console.log("fucking shot up ")
+
 }
