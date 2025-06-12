@@ -3,10 +3,10 @@
     "private": true,
     "version": "1.0.0",
     "scripts": {
-      "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
-      
-      "start": "node server/index.js"
-    },
+  "start": "node server/index.js",
+  "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+},
+
     "engines": {
       "node": "18.x"
     }
