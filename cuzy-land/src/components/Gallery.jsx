@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { useCart } from '../context/TempCartContext'; // 🛒 Import cart context
+// const BASE_URL = import.meta.env.VITE_BASE_URL;
+// console.log('Base URL:', BASE_URL);
 
 const API_URL = 'http://10.0.0.183:3000/api/gallery/getAll';
 

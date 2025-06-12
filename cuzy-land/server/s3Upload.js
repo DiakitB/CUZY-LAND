@@ -3,7 +3,7 @@ const { S3Client } = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: '../config.env' });
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION,
