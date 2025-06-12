@@ -1,0 +1,14 @@
+{
+    "name": "cuzy-land-root",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+      "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+      
+      "start": "node server/index.js"
+    },
+    "engines": {
+      "node": "18.x"
+    }
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import CartToggleButton from "../components/TempCartToggleBtn.jsx";
+import CartToggleButton from "./TempCartToggleBtn.jsx";
 import logoImage from "../assets/candles/Logo.png";
 
 const Header = () => {

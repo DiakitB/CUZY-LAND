@@ -1,22 +1,25 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: '../config.env' });
-const cors = require('cors');
-const mongoose = require('mongoose');
-const express = require('express');
-const candleRoutes = require('./routes/candleRoutes');
-const galleryRoutes = require('./routes/galleryRoutes');
+// Load environment variables
+import dotenv from 'dotenv';
+dotenv.config({ path: './config.env' });
+
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import candleRoutes from './routes/candleRoutes.js';
+import galleryRoutes from './routes/galleryRoutes.js';
 
 const app = express();
 
-// Ensure DATABASE environment variable is set
-if (!process.env.DATABASE) {
-  console.error('DATABASE environment variable is not set');
-  process.exit(1);
-}
+// Get __dirname in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Allow requests from frontend's origin
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
@@ -34,7 +37,17 @@ app.use((req, res, next) => {
 app.use('/api/candles', candleRoutes);
 app.use('/api/gallery', galleryRoutes);
 
-// Error handling middleware
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const clientBuildPath = path.resolve(__dirname, '../client/dist');
+  app.use(express.static(clientBuildPath));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
+}
+
+// Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send({
@@ -46,15 +59,12 @@ app.use((err, req, res, next) => {
 // Database Connection
 const DB = process.env.MONGODB_URI || process.env.DATABASE;
 mongoose
-  .connect(DB, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true
-  })
+  .connect(DB)
   .then(() => console.log('✅ Connected to MongoDB'))
   .catch((err) => console.error('❌ MongoDB Connection Error:', err));
 
 // Start Server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () =>
-  console.log(`🚀 Server running at port: ${PORT}`)
-);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running at port: ${PORT}`);
+});
