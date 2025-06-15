@@ -2,8 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
- "scripts": {
-  "heroku-postbuild": "cd ../../client && npm install && npm run build"
+"scripts": {
+  "start": "node index.js"
+ 
 }
 ,
   "keywords": [],
