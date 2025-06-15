@@ -22,7 +22,22 @@ const corsOptions = {
   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   optionsSuccessStatus: 200,
 };
+
+
 app.use(cors(corsOptions));
+
+app.use(express.static(path.join(__dirname, '../../client/dist')));
+
+// For any route, serve index.html from frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
+// Your API routes
+app.use('/api/candles', require('./routes/candleRoutes'));
+app.use('/api/gallery', require('./routes/galleryRoutes'));
+
+
 
 // Middleware
 app.use(express.json());
@@ -38,14 +53,14 @@ app.use('/api/candles', candleRoutes);
 app.use('/api/gallery', galleryRoutes);
 
 // Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.resolve(__dirname, '../client/dist');
-  app.use(express.static(clientBuildPath));
+// if (process.env.NODE_ENV === 'production') {
+//   const clientBuildPath = path.resolve(__dirname, '../client/dist');
+//   app.use(express.static(clientBuildPath));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
-  });
-}
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(clientBuildPath, 'index.html'));
+//   });
+// }
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
