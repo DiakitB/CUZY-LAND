@@ -17,9 +17,10 @@ const Header = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "Add New Candle", path: "/upload" },
-    { name: "How It Works", path: "/how-it-works" },
+    { name: "Gallery", path: "/gallery" }, // For viewing all candles
+    { name: "Add New Candle", path: "/new-candle" }, // For creating a new candle
+    { name: "Customized Candle", path: "/customized-candle" }, // For creating a customized candle
+    { name: "Customized Orders", path: "/customized-orders" }, // For viewing customized orders
     { name: "FAQs", path: "/faqs" },
     { name: "Contact", path: "/contact" },
   ];

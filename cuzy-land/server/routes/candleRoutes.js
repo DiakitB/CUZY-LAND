@@ -1,10 +1,24 @@
-const express = require('express');
+import express from 'express';
+import upload from '../s3Upload.js'; // Assuming this handles file uploads
+import {
+  createCustomizedCandle,
+  createNewCandle,
+  getAllCandles,
+} from '../controllers/candleController.js';
+import {  getCustomizedOrder} from '../controllers/custimizedOrder.js';
+
 const router = express.Router();
-const { createCandle } = require('../controllers/candleController');
-const upload = require('../s3Upload'); // S3 upload middleware
 
+// Route to create a customized candle
+router.post('/customized-candle', upload.single('image'), createCustomizedCandle);
 
-// POST /api/candles
+// Route to create a new candle
+router.post('/new-candle', upload.single('image'), createNewCandle);
 
-router.post('/', upload.single('image'), createCandle);
-module.exports = router;
+// Route to get all candles
+router.get('/gett-candles', getAllCandles);
+
+// Route to get all customized orders
+router.get('/customized-orders', getCustomizedOrder);
+
+export default router;

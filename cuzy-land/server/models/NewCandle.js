@@ -1,11 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const candleSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-
   description: {
     type: String,
     required: true,
@@ -24,4 +23,5 @@ const candleSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('NewCandle', candleSchema);
+const NewCandle = mongoose.model('NewCandle', candleSchema);
+export default NewCandle;

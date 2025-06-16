@@ -1,28 +1,13 @@
-const customizedOrder = require('../models/Candle')
+import CustomizedCandle from '../models/CustomizedCandle.js';
 
-
-
-exports.getCustomizedOrder= async(req, res)=>{
-
-    console.log(req.body)
-
-
-    try{
-    const orders = await customizedOrder.find()
-
-    console.log(orders)
-    res.status(200).send(orders)
-
-    }catch(error){
-        console.log(error)
-        res.status(500).send({
-            message: "Fail to fech customizedOrders"
-        })
-    }
-
-    
-    
-
-}
-
+// Controller to get all customized orders
+export const getCustomizedOrder = async (req, res) => {
+  try {
+    const orders = await CustomizedCandle.find(); // Assuming orders are stored in the CustomizedCandle model
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error fetching customized orders:', error);
+    res.status(500).json({ message: 'Failed to fetch customized orders.' });
+  }
+};
 

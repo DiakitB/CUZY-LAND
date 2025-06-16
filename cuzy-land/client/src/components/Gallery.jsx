@@ -5,7 +5,7 @@ import { useCart } from '../context/TempCartContext'; // 🛒 Import cart contex
 // const BASE_URL = import.meta.env.VITE_BASE_URL;
 // console.log('Base URL:', BASE_URL);
 
-const API_URL = 'http://10.0.0.183:3000/api/gallery/getAll';
+const API_URL = 'http://10.0.0.183:3000/api/candles/gett-candles';
 
 export default function Gallery() {
   const [candles, setCandles] = useState([]);
@@ -13,10 +13,14 @@ export default function Gallery() {
   const { addToCart } = useCart(); // 🛒 Access cart function
 
   const getAllCandles = async () => {
+    console.log('Fetching candles from:', API_URL); // Debugging log
     try {
       const response = await axios.get(API_URL);
       const fetchedCandles = response.data;
+      console.log( fetchedCandles? 'Fetched candles successfully' : 'No candles found'); // Debugging log
+      console.log('Fetched candles:', fetchedCandles); // Debugging log
       const sortedCandles = fetchedCandles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       setCandles(sortedCandles);
       console.log('Fetched candles:', sortedCandles); // Debugging log
     } catch (error) {

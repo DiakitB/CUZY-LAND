@@ -47,7 +47,7 @@ export default function CustomizeYourCandle() {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('http://10.0.0.183:3000/api/candles', formData, {
+      const response = await axios.post('http://10.0.0.183:3000/api/candles/customized-candle', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

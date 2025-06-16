@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/upload" element={<GalleryUpload />} />
+          <Route path="/new-candle" element={<GalleryUpload />} />
           <Route path="/cart" element={<CartSidebar />} /> {/* ✅ Only rendered on /cart */}
           <Route path="/candle-details" element={<CandleDetails/>}/>
           <Route path="/how-it-works" element={<HowItWorks />} />

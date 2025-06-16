@@ -1,9 +1,10 @@
 
-const express = require('express')
-const customizedOrderController = require('../controllers/custimizedOrder')
+// import express from 'express';
+// // const customizedOrderController = require('../controllers/custimizedOrder')
+// import { customizedOrderController } from '../controllers/customizedOrderController.js';
 
-const router = express.Router()
+// const router = express.Router()
 
-router.get('/order', customizedOrderController.getCustomizedOrder)
+// router.get('/order', customizedOrderController.getCustomizedOrder)
 
-module.exports = router
+// export default  router
