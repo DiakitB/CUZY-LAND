@@ -54,10 +54,11 @@ app.use((err, req, res, next) => {
 const DB = process.env.MONGODB_URI || process.env.DATABASE;
 const connectDB = async () => {
   try {
-    await mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(DB);
     console.log('✅ Connected to MongoDB');
   } catch (err) {
-    console.error('❌ MongoDB Connection Error:', err);
+    console.error('❌ MongoDB Connection Error:', err.message || 'Unknown error');
+    console.error('Ensure your MongoDB Atlas IP whitelist includes Heroku IPs or 0.0.0.0/0.');
     process.exit(1); // Exit the process if the database connection fails
   }
 };
@@ -66,10 +67,5 @@ connectDB();
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://0.0.0.0:${PORT}`);
 });
-
-
-// Lundi de 8h à 4h
-// Mardi de 8h à 4h
-// Mercredi de 8h à 4h
