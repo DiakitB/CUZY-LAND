@@ -30,6 +30,7 @@ const GalleryUpload = () => {
     }
 
     const formData = new FormData();
+    console.log("Form data created", formData);
     formData.append("image", image);
     formData.append("title", formFields.title);
     formData.append("description", formFields.description);
@@ -37,7 +38,7 @@ const GalleryUpload = () => {
 
     try {
       const response = await axios.post(
-        "http://10.0.0.183:3000/api/gallery/upload",
+        "http://10.0.0.183:3000/api/candles/new-candle",
         formData,
         {
           headers: {
@@ -51,7 +52,8 @@ const GalleryUpload = () => {
       console.log("Image URL:", response.data.imageUrl);
       // Reset form
       setImage(null);
-      setFormFields({ title: '', description: '' });
+      setFormFields({ title: '', description: '', price: '', imageUrl: '' });
+
     } catch (error) {
       console.error(error);
       toast.error("❌ Upload failed.");
