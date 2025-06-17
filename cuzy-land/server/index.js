@@ -41,6 +41,11 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/candles', candleRoutes);
 
+// Handle all other routes by serving the frontend's index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
