@@ -21,4 +21,9 @@ router.get('/gett-candles', getAllCandles);
 // Route to get all customized orders
 router.get('/customized-orders', getCustomizedOrder);
 
+router.get('/api/:id', (req, res) => {
+  console.log('Request received:', req.params);
+  res.send(`ID: ${req.params.id}`);
+});
+
 export default router;
