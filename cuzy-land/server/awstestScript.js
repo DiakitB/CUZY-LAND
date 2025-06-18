@@ -1,41 +1,36 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
-const mongoose = require('mongoose');
+import fs from 'fs';
+import path from 'path';
 
-// Debug: Log the database URI
-console.log('Database URI:', process.env.DATABASE);
+const allowedFolders = [ 'CUZY-LAND','cuzy-land','client', 'server', 'public', 'src'];
+const allowedFiles = [
+  'cuzy-land',
+  'package.json',
+  'Procfile',
+  'config.env',
+  '.gitignore',
+  'README.md',
+  'index.html',
+  'tailwind.config.cjs',
+  'vite.config.js',
+  'eslint.config.js',
+  'postcss.config.cjs',
+];
 
-// Connect to your MongoDB database
-mongoose.connect(process.env.DATABASE, { connectTimeoutMS: 30000 })
-  .then(() => console.log('Database connected successfully'))
-  .catch(err => console.error('Database connection error:', err));
+function generateTree(dir, depth = 0) {
+  const files = fs.readdirSync(dir);
+  files.forEach((file) => {
+    const fullPath = path.join(dir, file);
+    const isDirectory = fs.statSync(fullPath).isDirectory();
 
-const NewCandle = mongoose.model('NewCandle', new mongoose.Schema({
-  title: String,
-  description: String,
-  image: String,
-  price: Number, // Ensure the model includes the price field
-}));
-
-async function addRandomPriceToOldDocuments() {
-  try {
-    // Find all documents without the price field
-    const documents = await NewCandle.find({ price: { $exists: false } });
-
-    for (const doc of documents) {
-      // Generate a random price (e.g., between 10 and 100)
-      const randomPrice = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
-
-      // Update the document with the random price
-      await NewCandle.updateOne({ _id: doc._id }, { $set: { price: randomPrice } });
+    // Filter folders and files
+    if (isDirectory && allowedFolders.includes(file)) {
+      console.log(`${'│   '.repeat(depth)}├── ${file}/`);
+      generateTree(fullPath, depth + 1);
+    } else if (!isDirectory && allowedFiles.includes(file)) {
+      console.log(`${'│   '.repeat(depth)}├── ${file}`);
     }
-
-    console.log(`Updated ${documents.length} documents with random prices.`);
-  } catch (error) {
-    console.error('Error updating documents:', error);
-  } finally {
-    mongoose.connection.close();
-  }
+  });
 }
 
-addRandomPriceToOldDocuments();
+// Use the correct path to your project folder
+generateTree('C:/Users/MARCUS/Desktop/Blaky/CUZY-LAND/cuzy-land');

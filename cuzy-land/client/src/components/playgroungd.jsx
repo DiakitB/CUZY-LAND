@@ -30,3 +30,6 @@ const provoking = ()=>{
     console.log("fucking shot up ")
 
 }
+
+
+// npx tree -I "node_modules" -L 3
