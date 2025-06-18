@@ -40,6 +40,7 @@ Desktop.ini
 build/
 coverage/
 .tmp/
+!client/dist/
 
 # Temporary files
 *.tmp
