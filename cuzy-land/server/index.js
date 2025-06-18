@@ -1,23 +1,21 @@
 // index.js (ES Modules version)
 import express from 'express';
-import cors from 'cors';
 import path from 'path';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
-// Load environment variables
-dotenv.config({ path: '../config.env' });
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import candleRoutes from './routes/candleRoutes.js';
 
 // Convert __filename and __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Import routes
-import candleRoutes from './routes/candleRoutes.js';
-
 const app = express();
+
+// Load environment variables
+dotenv.config({ path: '../config.env' });
 
 // CORS Configuration
 const corsOptions = {
@@ -26,13 +24,13 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, '../../client/dist')));
-
 // Middleware
 app.use(express.json());
 
-// Debugging Middleware
+// Serve static files
+app.use(express.static(path.join(__dirname, '../../client/dist')));
+
+// Debugging Middleware (optional, remove if not needed)
 app.use((req, res, next) => {
   console.log(`Request received: ${req.method} ${req.url}`);
   next();
@@ -41,9 +39,11 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/candles', candleRoutes);
 
-// Handle all other routes by serving the frontend's index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+// Handle all unmatched routes by serving the frontend's index.html
+app.use((req, res) => {
+  const filePath = path.join(__dirname, '../../client/dist/index.html');
+  console.log('Serving index.html for unmatched route:', req.url);
+  res.sendFile(filePath);
 });
 
 // Error Handling Middleware
