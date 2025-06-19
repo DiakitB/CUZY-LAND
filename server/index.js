@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../../client/dist')));
+app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
 // Debugging Middleware (optional, remove if not needed)
 app.use((req, res, next) => {
@@ -41,7 +41,7 @@ app.use('/api/candles', candleRoutes);
 
 // Handle all unmatched routes by serving the frontend's index.html
 app.use((req, res) => {
-  const filePath = path.join(__dirname, '../../client/dist/index.html');
+  const filePath = path.resolve(__dirname, '../client/dist/index.html');
   console.log('Serving index.html for unmatched route:', req.url);
   res.sendFile(filePath);
 });
