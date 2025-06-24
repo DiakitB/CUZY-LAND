@@ -4,6 +4,11 @@ import CandlePreview3D from './CandlePreview3D';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+console.log('Environment Variable VITE_BASE_URL:', import.meta.env.VITE_BASE_URL); // Debugging log
+
+console.log('Base URL:', BASE_URL);
+
 
 const fragrances = ['Vanilla Blossom', 'Lavender Fields', 'Citrus Dream', 'Rose Petals', 'Coconut Breeze'];
 const colors = [
@@ -47,7 +52,7 @@ export default function CustomizeYourCandle() {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('http://10.0.0.183:3000/api/candles/customized-candle', formData, {
+      const response = await axios.post(`${BASE_URL}/candles/customized-candle`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

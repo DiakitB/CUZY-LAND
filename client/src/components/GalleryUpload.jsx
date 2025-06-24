@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+console.log('Environment Variable VITE_BASE_URL:', import.meta.env.VITE_BASE_URL); // Debugging log
+
+console.log('Base URL:', BASE_URL);
 
 const GalleryUpload = () => {
   const [image, setImage] = useState(null);
@@ -38,7 +42,7 @@ const GalleryUpload = () => {
 
     try {
       const response = await axios.post(
-        "http://10.0.0.183:3000/api/candles/new-candle",
+       ` ${BASE_URL}/candles/new-candle`,
         formData,
         {
           headers: {

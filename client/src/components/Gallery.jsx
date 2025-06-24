@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { useCart } from '../context/TempCartContext'; // 🛒 Import cart context
-// const BASE_URL = import.meta.env.VITE_BASE_URL;
-// console.log('Base URL:', BASE_URL);
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+console.log('Environment Variable VITE_BASE_URL:', import.meta.env.VITE_BASE_URL); // Debugging log
 
-const API_URL = 'http://10.0.0.183:3000/api/candles/gett-candles';
+console.log('Base URL:', BASE_URL);
+
+const API_URL =` ${BASE_URL}/candles/gett-candles`;
 
 export default function Gallery() {
   const [candles, setCandles] = useState([]);
