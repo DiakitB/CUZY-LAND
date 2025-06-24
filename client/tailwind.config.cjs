@@ -1,8 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html", // Include the main HTML file
-    "./src/**/*.{js,ts,jsx,tsx}", // Include all JS/TS/JSX/TSX files in the src folder
+    './index.html', // Include the main HTML file
+    './src/**/*.{js,ts,jsx,tsx}', // Include all JS/TS/JSX/TSX files in the src directory
+  ],
+  safelist: [
+    // Add any dynamic class names here to prevent PurgeCSS from removing them
+    'bg-blush-light',
+    'bg-blush-dark',
+    'text-amber-light',
+    'text-amber-dark',
+    'font-serif',
+    'font-sans',
+    'hero-gradient',
+    'about-gradient',
   ],
   theme: {
     extend: {
