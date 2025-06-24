@@ -45,11 +45,4 @@ module.exports = {
     },
   },
   plugins: [],
-  purge: {
-    enabled: true, // Enable purging unused styles in production
-    content: [
-      "./index.html",
-      "./src/**/*.{js,ts,jsx,tsx}",
-    ],
-  },
 };
