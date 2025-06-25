@@ -14,16 +14,30 @@ const ContactForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // You can add backend logic here (e.g., send to email or API)
-    console.log("Form submitted:", formData);
+    try {
+      const response = await fetch("https://formspree.io/f/xgvypoln", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setSubmitted(true);
-    setFormData({ name: "", email: "", subject: "", message: "" });
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
 
-    setTimeout(() => setSubmitted(false), 4000); // hide message after 4s
+        setTimeout(() => setSubmitted(false), 4000); // hide after 4s
+      } else {
+        alert("There was a problem submitting the form. Please try again.");
+      }
+    } catch (error) {
+      alert("Error submitting form: " + error.message);
+    }
   };
 
   return (
@@ -34,7 +48,9 @@ const ContactForm = () => {
       </p>
 
       {submitted && (
-        <div className="mb-6 text-green-600 font-semibold">Message sent! We'll get back to you soon. 💌</div>
+        <div className="mb-6 text-green-600 font-semibold">
+          Message sent! We'll get back to you soon. 💌
+        </div>
       )}
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 text-left">
