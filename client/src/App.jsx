@@ -16,6 +16,7 @@ import CartSidebar from "./components/CartPage"; // ✅ Your full cart page
 import CandleDetails from "./components/candleDetails";
 import HowItWorks from "./components/HowItWorks";
  import FAQs from "./components/FAQs"; // Uncomment if you want to use FAQs component
+ import GuestCheckout from "./components/GuestCheckout";
 ;
 const App = () => {
   return (
@@ -36,6 +37,10 @@ const App = () => {
           <Route path="/candle-details" element={<CandleDetails/>}/>
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faqs" element={<FAQs />} /> {/* Uncomment if you want to use FAQs component */}
+          <Route path="/guest-checkout" element={<GuestCheckout />} />
+          {/* Add more routes as needed */}
+          
+          {/* Example of a dynamic route for candle details */}
           {/* Add more routes as needed */}
           
         </Routes>

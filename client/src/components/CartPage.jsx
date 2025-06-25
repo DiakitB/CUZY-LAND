@@ -1,10 +1,16 @@
-// src/pages/CartPage.jsx
-import React from 'react';
-import { useCart } from '../context/TempCartContext'; // Adjust the path if needed
+import React, { useEffect } from 'react';
+import { useCart } from '../context/TempCartContext';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function CartPage() {
   const { cartItems, removeFromCart } = useCart();
+  const navigate = useNavigate();
+
+  // 🔼 Scroll to top when cart is opened
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
 
@@ -51,8 +57,8 @@ export default function CartPage() {
             </div>
 
             <button
-              className="w-full bg-rose-600 hover:bg-rose-700 text-white py-3 rounded-lg mt-4"
-              onClick={() => alert('Proceeding to checkout...')}
+              className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+              onClick={() => navigate('/guest-checkout')}
             >
               Proceed to Checkout
             </button>
